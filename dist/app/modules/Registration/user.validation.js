@@ -2,10 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const zod_1 = require("zod");
 const userValidationSchema = (0, zod_1.object)({
-    name: (0, zod_1.string)().min(6, { message: "Name must be at least 6 characters long" }),
+    name: (0, zod_1.string)().min(3, { message: "Name must be at least 3 characters long" }),
     email: (0, zod_1.string)().email({ message: "Invalid email address" }),
-    password: (0, zod_1.string)().min(6, {
-        message: "Password must be at least 6 characters long",
+    password: (0, zod_1.string)().min(1, {
+        message: "Password must be at least 1 characters long",
     }),
     phone: (0, zod_1.string)().min(1, { message: "Phone number is required" }),
     role: zod_1.z

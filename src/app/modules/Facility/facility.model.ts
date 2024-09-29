@@ -5,6 +5,10 @@ const facilitySchema = new Schema<Facility>({
     type: String,
     required: true,
   },
+  image: {
+    type: String,
+    required: true,
+  },
   description: {
     type: String,
     required: true,

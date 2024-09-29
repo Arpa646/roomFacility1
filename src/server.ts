@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import app from './app';
 
+const port = process.env.PORT || 5000;
 async function main() {
 
   //sportFacility //eE8vmF9Tq8ebFt5s
@@ -10,7 +11,7 @@ async function main() {
   
     });
 
-    const port = process.env.PORT || 5000;
+  
     app.listen(port, () => {
       console.log(`Server is running on port ${port}`);
     });

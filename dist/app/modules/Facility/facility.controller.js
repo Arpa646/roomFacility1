@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.facilityController = void 0;
+exports.facilityController = exports.getSingleFacility = void 0;
 const asynch_1 = __importDefault(require("../../middleware/asynch"));
 const response_1 = __importDefault(require("../../utils/response"));
 const facility_services_1 = require("./facility.services");
@@ -65,6 +65,42 @@ const getAllFacility = (req, res) => __awaiter(void 0, void 0, void 0, function*
         console.log(err);
     }
 });
+// Get single facility by ID
+const getSingleFacility = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { id } = req.params; // Get the facility ID from request params
+        console.log(id);
+        const facility = yield facility_services_1.facilityServices.getFacilityByIdFromDB(id);
+        if (!facility) {
+            return res.status(http_status_codes_1.StatusCodes.NOT_FOUND).json({
+                success: false,
+                message: "Facility not found",
+                data: null,
+            });
+        }
+        res.status(http_status_codes_1.StatusCodes.OK).json({
+            success: true,
+            message: "Facility retrieved successfully",
+            data: facility,
+        });
+    }
+    catch (err) {
+        if (err instanceof Error) {
+            res.status(http_status_codes_1.StatusCodes.INTERNAL_SERVER_ERROR).json({
+                success: false,
+                message: "Server error",
+                error: err.message,
+            });
+        }
+        else {
+            res.status(http_status_codes_1.StatusCodes.INTERNAL_SERVER_ERROR).json({
+                success: false,
+                message: "Unknown server error",
+            });
+        }
+    }
+});
+exports.getSingleFacility = getSingleFacility;
 const deleteFacility = (0, asynch_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     console.log("this is id", id);
@@ -98,7 +134,7 @@ const deleteFacility = (0, asynch_1.default)((req, res, next) => __awaiter(void 
             res.status(500).json({
                 success: false,
                 message: "Error deleting facility",
-                error: 'An unexpected error occurred.',
+                error: "An unexpected error occurred.",
             });
         }
     }
@@ -128,4 +164,5 @@ exports.facilityController = {
     getAllFacility,
     updateFacility,
     deleteFacility,
+    getSingleFacility: exports.getSingleFacility,
 };

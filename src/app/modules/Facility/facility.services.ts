@@ -28,6 +28,19 @@ const getAllFacilityFromDB = async () => {
   return result;
 };
 
+
+
+
+// services/facilityServices.ts
+
+
+// Fetch single facility by ID from the database
+export const getFacilityByIdFromDB = async (id: string) => {
+
+  const result =await FacilityModel.findOne({ _id: id, isDeleted: false });
+  return result;
+};
+
 // const updateFacilityInDB = async (id, updateData) => {
 //   const facility = await FacilityModel.findByIdAndUpdate(id, updateData, {
 //     new: true,
@@ -70,5 +83,6 @@ export const facilityServices = {
   createFacilityIntoDB,
   getAllFacilityFromDB,
   updateFacilityInDB,
-  deleteFacilityInDB,
+  deleteFacilityInDB,  
+  getFacilityByIdFromDB
 };

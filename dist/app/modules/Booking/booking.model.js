@@ -39,6 +39,10 @@ const bookingSchema = new mongoose_1.Schema({
         type: String,
         required: true,
     },
+    transactionid: {
+        type: String,
+        required: true,
+    },
     endTime: {
         type: String,
         required: true,
@@ -55,6 +59,11 @@ const bookingSchema = new mongoose_1.Schema({
     isBooked: {
         type: String,
         enum: ["pending", "confirmed", "cancelled"],
+        default: "pending",
+    },
+    isPaid: {
+        type: String,
+        enum: ["pending", "paid", "cancelled"],
         default: "pending",
     },
 });

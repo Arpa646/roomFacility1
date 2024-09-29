@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.facilityServices = void 0;
+exports.facilityServices = exports.getFacilityByIdFromDB = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const facility_model_1 = __importDefault(require("./facility.model"));
 const createFacilityIntoDB = (facilityData) => __awaiter(void 0, void 0, void 0, function* () {
@@ -35,6 +35,13 @@ const getAllFacilityFromDB = () => __awaiter(void 0, void 0, void 0, function* (
     const result = yield facility_model_1.default.find({ isDeleted: false });
     return result;
 });
+// services/facilityServices.ts
+// Fetch single facility by ID from the database
+const getFacilityByIdFromDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield facility_model_1.default.findOne({ _id: id, isDeleted: false });
+    return result;
+});
+exports.getFacilityByIdFromDB = getFacilityByIdFromDB;
 // const updateFacilityInDB = async (id, updateData) => {
 //   const facility = await FacilityModel.findByIdAndUpdate(id, updateData, {
 //     new: true,
@@ -69,4 +76,5 @@ exports.facilityServices = {
     getAllFacilityFromDB,
     updateFacilityInDB,
     deleteFacilityInDB,
+    getFacilityByIdFromDB: exports.getFacilityByIdFromDB
 };

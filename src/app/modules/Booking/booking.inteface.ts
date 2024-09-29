@@ -7,7 +7,9 @@ export interface Booking {
     endTime: string;
     user: Types.ObjectId; // Correctly use Types.ObjectId
     isBooked?: string;
+    isPaid?: string;
     payableAmount?: number;
+    transactionid?:string
 
 
 }

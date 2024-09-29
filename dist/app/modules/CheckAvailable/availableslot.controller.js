@@ -23,8 +23,8 @@ const checkslot = (0, asynch_1.default)((req, res, next) => __awaiter(void 0, vo
     console.log(result);
     if (result.length === 0) {
         return res.status(404).json({
-            success: false,
-            message: "No Data Found",
+            success: true,
+            message: "No slot AvailAble on this Date ",
             data: [],
         });
     }

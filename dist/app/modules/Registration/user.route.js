@@ -11,4 +11,5 @@ const user_constant_1 = require("./user.constant");
 const router = express_1.default.Router();
 router.post("/signup", user_controller_1.userControllers.createUser);
 router.get("/", (0, auth_1.default)(user_constant_1.USER_ROLE.admin), user_controller_1.userControllers.getAllUser);
+router.get("/:id", user_controller_1.userControllers.getSingleUser);
 exports.UserRoutes = router;

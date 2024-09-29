@@ -6,8 +6,12 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 const loginUser = async (payload: TLoginUser) => {
   // checking if the user is exist
-  const user = await UserRegModel.findOne({ email: payload.email });
-
+ 
+  const user = await UserRegModel.findOne({
+    email: payload.email,
+    password: payload.password
+  });
+  
   if (!user) {
     throw new Error("This user is not found!");
 
@@ -41,10 +45,19 @@ const loginUser = async (payload: TLoginUser) => {
   const accessToken = jwt.sign(jwtPayload, "jjjnn" as string, {
     expiresIn: "10d",
   });
+  const refreshToken = jwt.sign(jwtPayload, "production" as string, {
+    expiresIn: "365d",
+  });
 
-  return [accessToken, user];
+
+
+
+
+
+  return [accessToken,user,refreshToken];
 };
 
 export const AuthServices = {
   loginUser,
+
 };

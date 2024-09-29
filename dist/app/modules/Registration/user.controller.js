@@ -58,9 +58,44 @@ const getAllUser = (0, asynch_1.default)((req, res) => __awaiter(void 0, void 0,
         data: result,
     });
 }));
+const getSingleUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { id } = req.params; // Get the facility ID from request params
+        console.log(id);
+        const facility = yield user_service_1.UserServices.getUserByIdFromDB(id);
+        if (!facility) {
+            return res.status(http_status_codes_1.StatusCodes.NOT_FOUND).json({
+                success: false,
+                message: "Facility not found",
+                data: null,
+            });
+        }
+        res.status(http_status_codes_1.StatusCodes.OK).json({
+            success: true,
+            message: "Facility retrieved successfully",
+            data: facility,
+        });
+    }
+    catch (err) {
+        if (err instanceof Error) {
+            res.status(http_status_codes_1.StatusCodes.INTERNAL_SERVER_ERROR).json({
+                success: false,
+                message: "Server error",
+                error: err.message,
+            });
+        }
+        else {
+            res.status(http_status_codes_1.StatusCodes.INTERNAL_SERVER_ERROR).json({
+                success: false,
+                message: "Unknown server error",
+            });
+        }
+    }
+});
 exports.userControllers = {
     createUser,
     getAllUser,
+    getSingleUser,
 };
 // import { UserServices } from "./user.service";
 // import catchAsync from "../../middleware/asynch";

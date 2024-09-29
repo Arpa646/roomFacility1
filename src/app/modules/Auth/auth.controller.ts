@@ -6,14 +6,15 @@ import { AuthServices } from "./auth.services";
 import { Request, Response, NextFunction } from 'express';
 const loginUser = catchAsync(async (req: Request, res: Response) => {
   console.log(req.body);
-  const [accessToken,user] = await AuthServices.loginUser(req.body);
+  const [accessToken,user,refreshToken] = await AuthServices.loginUser(req.body);
+
+console.log(refreshToken)
 
 
-
-  // res.cookie('refreshToken', refreshToken, {
-  //   secure: config.NODE_ENV === 'production',
-  //   httpOnly: true,
-  // });
+  res.cookie('refreshToken', refreshToken, {
+    secure: 'production' === 'production',
+    httpOnly: true,
+  });
 
   // sendResponse(res, {
   //   statusCode: 200,

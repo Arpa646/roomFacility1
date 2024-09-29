@@ -12,8 +12,8 @@ const checkslot = catchAsync(async (req: Request, res: Response, next: NextFunct
   
   if (result.length === 0) {
     return res.status(404).json({
-      success: false,
-      message: "No Data Found",
+      success: true,
+      message: "No slot AvailAble on this Date ",
       data: [],
     });
   }

@@ -6,6 +6,10 @@ import { TUserRole } from "../modules/Registration/user.constant";
 const auth = (...requiredRoles: TUserRole[]) => {
   return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     const authHeader = req.headers.authorization;
+
+
+
+    
     console.log("Authorization Header:", authHeader);
 
     // Checking if the Authorization header is present

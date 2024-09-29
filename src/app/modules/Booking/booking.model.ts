@@ -16,6 +16,10 @@ const bookingSchema: Schema<Booking> = new Schema<Booking>({
     type: String,
     required: true,
   },
+  transactionid: {
+    type: String,
+    required: true,
+  },
   endTime: {
     type: String,
     required: true,
@@ -32,6 +36,11 @@ const bookingSchema: Schema<Booking> = new Schema<Booking>({
   isBooked: {
     type: String,
     enum: ["pending", "confirmed", "cancelled"],
+    default: "pending",
+  },
+  isPaid: {
+    type: String,
+    enum: ["pending", "paid", "cancelled"],
     default: "pending",
   },
 });

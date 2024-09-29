@@ -42,7 +42,16 @@ const getAllUserFromDB = () => __awaiter(void 0, void 0, void 0, function* () {
     }
     return result;
 });
-exports.UserServices = { createUserIntoDB, getAllUserFromDB };
+const getUserByIdFromDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log('hii', id);
+    const result = yield user_model_1.UserRegModel.findOne({ _id: id });
+    return result;
+});
+exports.UserServices = {
+    createUserIntoDB,
+    getAllUserFromDB,
+    getUserByIdFromDB,
+};
 // const createFacultyIntoDB = async (password: string, payload: TFaculty) => {
 //   const session = await mongoose.startSession();
 //   try {

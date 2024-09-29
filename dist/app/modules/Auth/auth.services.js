@@ -18,7 +18,10 @@ const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const loginUser = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     // checking if the user is exist
-    const user = yield user_model_1.UserRegModel.findOne({ email: payload.email });
+    const user = yield user_model_1.UserRegModel.findOne({
+        email: payload.email,
+        password: payload.password
+    });
     if (!user) {
         throw new Error("This user is not found!");
     }
@@ -40,7 +43,10 @@ const loginUser = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     const accessToken = jsonwebtoken_1.default.sign(jwtPayload, "jjjnn", {
         expiresIn: "10d",
     });
-    return [accessToken, user];
+    const refreshToken = jsonwebtoken_1.default.sign(jwtPayload, "production", {
+        expiresIn: "365d",
+    });
+    return [accessToken, user, refreshToken];
 });
 exports.AuthServices = {
     loginUser,

@@ -32,7 +32,17 @@ const getAllUserFromDB = async () => {
   return result;
 };
 
-export const UserServices = { createUserIntoDB, getAllUserFromDB };
+const getUserByIdFromDB = async (id: string) => {
+  console.log('hii',id)
+  const result = await UserRegModel.findOne({ _id: id});
+  return result;
+};
+
+export const UserServices = {
+  createUserIntoDB,
+  getAllUserFromDB,
+  getUserByIdFromDB,
+};
 // const createFacultyIntoDB = async (password: string, payload: TFaculty) => {
 
 //   const session = await mongoose.startSession();

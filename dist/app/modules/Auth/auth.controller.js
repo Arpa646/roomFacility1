@@ -17,11 +17,12 @@ const asynch_1 = __importDefault(require("../../middleware/asynch"));
 const auth_services_1 = require("./auth.services");
 const loginUser = (0, asynch_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(req.body);
-    const [accessToken, user] = yield auth_services_1.AuthServices.loginUser(req.body);
-    // res.cookie('refreshToken', refreshToken, {
-    //   secure: config.NODE_ENV === 'production',
-    //   httpOnly: true,
-    // });
+    const [accessToken, user, refreshToken] = yield auth_services_1.AuthServices.loginUser(req.body);
+    console.log(refreshToken);
+    res.cookie('refreshToken', refreshToken, {
+        secure: 'production' === 'production',
+        httpOnly: true,
+    });
     // sendResponse(res, {
     //   statusCode: 200,
     //   success: true,

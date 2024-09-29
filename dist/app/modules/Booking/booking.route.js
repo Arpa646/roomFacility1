@@ -12,7 +12,7 @@ const user_constant_1 = require("../Registration/user.constant");
 const booking_controller_1 = require("./booking.controller");
 const router = express_1.default.Router();
 router.post("/", (0, auth_1.default)(user_constant_1.USER_ROLE.user), booking_controller_1.bookingController.createBooking);
-// router.get('/', userControllers.getAllUser);
+router.post("/success", booking_controller_1.bookingController.confirmationController);
 router.get("/", (0, auth_1.default)(user_constant_1.USER_ROLE.admin), booking_controller_1.bookingController.getAllBookings);
 router.get("/user", (0, auth_1.default)(user_constant_1.USER_ROLE.user), booking_controller_1.bookingController.getBookingsByEmail);
 router.delete("/:id", (0, auth_1.default)(user_constant_1.USER_ROLE.user), booking_controller_1.bookingController.cancelBooking);

@@ -1,10 +1,10 @@
 import { object, string, z } from "zod";
 
 const userValidationSchema = object({
-  name: string().min(6, { message: "Name must be at least 6 characters long" }),
+  name: string().min(3, { message: "Name must be at least 3 characters long" }),
   email: string().email({ message: "Invalid email address" }),
-  password: string().min(6, {
-    message: "Password must be at least 6 characters long",
+  password: string().min(1, {
+    message: "Password must be at least 1 characters long",
   }),
   phone: string().min(1, { message: "Phone number is required" }),
   role: z

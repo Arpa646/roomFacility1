@@ -12,21 +12,23 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const mongoose_1 = __importDefault(require("mongoose"));
-const app_1 = __importDefault(require("./app"));
-const port = process.env.PORT || 5000;
-function main() {
-    return __awaiter(this, void 0, void 0, function* () {
-        //sportFacility //eE8vmF9Tq8ebFt5s
-        try {
-            yield mongoose_1.default.connect("mongodb+srv://sportFacility:eE8vmF9Tq8ebFt5s@cluster0.eep6yze.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0", {});
-            app_1.default.listen(port, () => {
-                console.log(`Server is running on port ${port}`);
-            });
+exports.paymentServices = void 0;
+const booking_model_1 = __importDefault(require("./booking.model"));
+const confirmationService = (transactionid) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const result = yield booking_model_1.default.findOneAndUpdate({ transactionid }, {
+            isPaid: "paid",
+        }, { new: true } // returns the updated document
+        );
+        if (!result) {
+            throw new Error("Booking not found or update failed");
         }
-        catch (err) {
-            console.error('Error connecting to MongoDB:', err);
-        }
-    });
-}
-main();
+        console.log("confirmation", transactionid);
+        return result;
+    }
+    catch (error) {
+        console.error("Error confirming payment:", error);
+        throw error;
+    }
+});
+exports.paymentServices = { confirmationService };
